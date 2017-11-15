@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="weight_height">身高/体重<span class="mui_heighr_weight"></span></div>
+    <script src="/mango/js/jquery.min.js"></script>
+    <script src="/mango/js/mui.min.js "></script>
+    <script src="/mango/js/mui.view.js "></script>
+    <script src="/mango/js/mui.picker.min.js"></script>
+    <script>
+        mui.init({});
+        mui("#account").on("tap","#weight_height",function(){
+            var picker = new mui.PopPicker({layer:2});
+            var height_arr=new Array();
+            var weight_arr=new Array();
+            for(var i=0;i<71;i++){
+                var dict={}
+                dict.value=40+i;
+                dict.text=40+i;
+                weight_arr.push(dict);
+            }
+            for(var i=0;i<51;i++){
+                var dict={};
+                dict.value=150+i;
+                dict.text=150+i;
+                dict.children=weight_arr;
+                height_arr.push(dict);
+            }
+            picker.setData(height_arr);
+            picker.pickers[0].setSelectedValue('175', 200);
+            picker.pickers[1].setSelectedIndex('25', 200);
+            picker.show(function (selectItems) {
+                console.log(selectItems[0].value);
+                console.log(selectItems[1].value);
+                var str=selectItems[0].value+"/"+selectItems[1].value;
+                console.log(str);
+                $(".mui_heighr_weight").html(str);
+            })
+        })
+    </script>
+</body>
+</html>
